@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FORM INDEX</title>
+   <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+</head>
+<body>
+
+<h3>ACCIDENT IDENTIFICATION DETAILS</h3>
+<form name="AccidentIdenification" method="post" action="{% url 'forms:insert' %}">
+    {% csrf_token %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+
+            <tr>
+                <td>State</td>
+                <td><input type="text" name="state"/> </td>
+            </tr>
+
+            <tr>
+                <td>District</td>
+                <td><input type="text" name="district"/> </td>
+            </tr>
+
+             <tr>
+                <td>FIR No.</td>
+                <td><input type="text" name="fir_no"/> </td>
+            </tr>
+
+             <tr>
+                <td>Police Station</td>
+                <td><input type="text" name="police_station"/> </td>
+            </tr>
+
+             <tr>
+                <td>Date & Time</td>
+                <td><input type="datetime" name="date_time" value="{{ datetime.now }}"/> </td>
+            </tr>
+
+             <tr>
+                <td>Area Type</td>
+                <td><input type="text" name="area_type"/> </td>
+            </tr>
+
+             <tr>
+                <td>Accident Type</td>
+                <td><input type="text" name="accident_type"/> </td>
+            </tr>
+
+             <tr>
+                <td>No. of Vehicles</td>
+                <td><input type="number" name="no_vehicles"/> </td>
+            </tr>
+
+             <tr>
+                <td>No. of Fatalities</td>
+                <td><input type="number" name="no_fatalities"/> </td>
+            </tr>
+
+             <tr>
+                <td>No. of Injured Needing Hospitalisation</td>
+                <td><input type="number" name="no_injured_hospitalisation"/> </td>
+            </tr>
+
+             <tr>
+                <td>No. of Injured Not Needing Hospitalisation</td>
+                <td><input type="number" name="no_injured_not_hospitalisation"/> </td>
+             </tr>
+
+            <tr>
+                <td>Hit And Run</td>
+                <td>
+                    <select name="hit_run">
+                        <option value="TRUE"> YES </option>
+                        <option value="FALSE"> NO </option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Ongoing Road Work</td>
+                <td>
+                    <select name="ongoing_road_work">
+                        <option value="TRUE"> YES </option>
+                        <option value="FALSE"> NO </option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                   WEATHER TYPE
+                </td>
+                <td>
+                    <input type="text" name="weather_type"/>
+                </td>
+            </tr>
+
+             <tr>
+                <td>
+                   COLLISION TYPE
+                </td>
+                <td>
+                    <input type="text" name="collision_type"/>
+                </td>
+            </tr>
+
+            <tr rowspan="2">
+                <input type="submit" name="form_submit_button">
+            </tr>
+
+        </table>
+    </div>
+
+</form>
+
+</body>
+</html>
+
