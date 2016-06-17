@@ -22,9 +22,13 @@ class AccidentIdentification(models.Model):
     weather_type = models.CharField(max_length=30)
     collision_type = models.CharField(max_length=50)
 
+    def __str__(self):
+        return str(str(self.pk) + '-' +self.state + '-' + self.district + '-' + self.fir_no)
+
 
 #DATABASE FOR TABLE B
 class AccidentDetail(models.Model):
+    uid = models.ForeignKey(AccidentIdentification, on_delete=models.CASCADE)
     town = models.CharField(max_length= 500)
     road_name = models.CharField(max_length= 500)
     road_type = models.CharField(max_length=100)
@@ -35,7 +39,7 @@ class AccidentDetail(models.Model):
     accident_spot = models.CharField(max_length=100)
     road_chainage = models.CharField(max_length=100)
     longitude = models.FloatField()
-    latitude = models.FloatField()
+    lattitude = models.FloatField()
     #COMBINING THE FIELD OF TABLE C - Has a single attribute
     property_damage = models.CharField(max_length=100)
 
@@ -43,6 +47,7 @@ class AccidentDetail(models.Model):
 
 #DATABASE FOR TABLE D
 class VehiclesInvolved(models.Model):
+    uid = models.ForeignKey(AccidentIdentification, on_delete=models.CASCADE)
     type = models.CharField(max_length=100)
     reg_no = models.CharField(max_length=100)
     disposition = models.CharField(max_length=100)
@@ -52,6 +57,7 @@ class VehiclesInvolved(models.Model):
 
 # DATABASE FOR TABLE E
 class VictimsInvolved(models.Model):
+    uid = models.ForeignKey(AccidentIdentification, on_delete=models.CASCADE)
     type = models.CharField(max_length=50)
     sex = models.CharField(max_length=10)
     age = models.IntegerField()

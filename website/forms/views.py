@@ -1,15 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse
 from .models import *
 
 # INDEX
 def index(request):
-    template = loader.get_template('forms/index.html')
+    template = loader.get_template('forms/form1.html')
     context = None
     return HttpResponse(template.render(context, request))
 
-def submit(request):
+def form2(request):
+    template = loader.get_template('forms/form2.html')
+    return HttpResponse(template.render(None, request))
+
+def submit1(request):
     if request.method == 'POST':
         a = AccidentIdentification()
         a.state = request.POST.get('state')
@@ -28,6 +32,27 @@ def submit(request):
         a.weather_type = request.POST.get('weather_type')
         a.collision_type = request.POST.get('collision_type')
         a.save()
-        return HttpResponse("SAVE SUCCESSFUL")
+        return redirect("submit_form2")
+    else:
+        return HttpResponse("SOME ISSUE, PLEASE TRY AGAIN LATER")
+
+def submit2(request):
+    if request.method == 'POST':
+        b = AccidentDetail()
+        b.town = request.POST.get('town')
+        b.road_name = request.POST.get('road_name')
+        b.road_type = request.POST.get('road_type')
+        b.road_number = request.POST.get('road_number')
+        b.no_lanes = request.POST.get('no_lanes')
+        b.physical_divider = request.POST.get('physical_divider')
+        b.road_surface = request.POST.get('road_surface')
+        b.accident_spot = request.POST.get('accident_spot')
+        b.road_chainage = request.POST.get('road_chainage')
+        b.latitude = request.POST.get('latitude')
+        b.longitude = request.POST.get('longitude')
+        b.property_damage = request.POST.get('property_damage')
+        b.save()
+        return HttpResponse('Save Successful... Hurray')
+
     else:
         return HttpResponse("SOME ISSUE, PLEASE TRY AGAIN LATER")
