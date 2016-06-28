@@ -208,7 +208,7 @@
 				</tr>
 
 			</table>
-		<div style="float:right"><a data-toggle="tab" href="#form2"><input type="button" class="btn btn-success" id="btnNext" value="NEXT"/></a></div>
+		<div style="float:right"><a data-toggle="tab" href="#form2"><input type="button" class="btn btn-success" onclick="nextTab()" value="NEXT"/></a></div>
 		
     </div>	
 	
@@ -319,8 +319,8 @@
 				
 			</table>
 	
-	<div style="float:left"><a data-toggle="tab" href="#form1"><input type="button" class="btn btn-danger" id="btnPrev" value="PREVIOUS"/></a></div>
-	<div style="float:right"><a data-toggle="tab" href="#form3"><input type="button" class="btn btn-success" id="btnNext" value="NEXT"/></a></div>
+	<div style="float:left"><a data-toggle="tab" href="#form1"><input type="button" class="btn btn-danger" onclick="prevTab()" value="PREVIOUS"/></a></div>
+	<div style="float:right"><a data-toggle="tab" href="#form3"><input type="button" class="btn btn-success" onclick="nextTab()" value="NEXT"/></a></div>
 	
 	</div>
 	
@@ -418,8 +418,8 @@
 				
 				
 			</table>
-    <div style="float:left"><a data-toggle="tab" href="#form2"><input type="button" class="btn btn-danger" id="btnPrev" value="PREVIOUS"/></a></div>
-	<div style="float:right"><a data-toggle="tab" href="#form4"><input type="button" class="btn btn-success" id="btnNext" value="NEXT"/></a></div>
+    <div style="float:left"><a data-toggle="tab" href="#form2"><input type="button" class="btn btn-danger" onclick="prevTab()" value="PREVIOUS"/></a></div>
+	<div style="float:right"><a data-toggle="tab" href="#form4"><input type="button" class="btn btn-success" onclick="nextTab()" value="NEXT"/></a></div>
 	</div>
 	
 	
@@ -534,7 +534,7 @@
 			</table>
 			
 	<center>  <input type="submit" name='submit' class='btn btn-lg btn-primary' value="SUBMIT"/> </center>	
-    <div style="float:left"><a data-toggle="tab" href="#form3"><input type="button" class="btn btn-danger" id="btnPrev" value="PREVIOUS"/></a></div>
+    <div style="float:left"><a data-toggle="tab" href="#form3"><input type="button" class="btn btn-danger" onclick="prevTab()" value="PREVIOUS"/></a></div>
 	</div>
   
   </div><!--TAB CONTENT-->
@@ -554,6 +554,20 @@ $('#btnNext').click(function(){
 $('#btnPrev').click(function(){
   $('.nav > .active').prev('li').find('a').trigger('click');
 });
+
+function nextTab() {
+  $(' li.active')
+    .next()
+    .find('a[data-toggle="tab"]')
+    .click();
+}
+
+function prevTab() {
+  $(' li.active')
+    .prev()
+    .find('a[data-toggle="tab"]')
+    .click();
+}
 </script>
 </html>
 
