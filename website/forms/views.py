@@ -32,7 +32,7 @@ def submit1(request):
         a.weather_type = request.POST.get('weather_type')
         a.collision_type = request.POST.get('collision_type')
         a.save()
-        return redirect("submit_form2")
+        return HttpResponse("Saved into database")
     else:
         return HttpResponse("SOME ISSUE, PLEASE TRY AGAIN LATER")
 

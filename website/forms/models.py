@@ -28,7 +28,7 @@ class AccidentIdentification(models.Model):
 
 #DATABASE FOR TABLE B
 class AccidentDetail(models.Model):
-    uid = models.ForeignKey(AccidentIdentification, on_delete=models.CASCADE)
+    uid = models.ForeignKey(AccidentIdentification, on_delete=models.CASCADE, default=0)
     town = models.CharField(max_length= 500)
     road_name = models.CharField(max_length= 500)
     road_type = models.CharField(max_length=100)
@@ -47,17 +47,19 @@ class AccidentDetail(models.Model):
 
 #DATABASE FOR TABLE D
 class VehiclesInvolved(models.Model):
-    uid = models.ForeignKey(AccidentIdentification, on_delete=models.CASCADE)
-    type = models.CharField(max_length=100)
-    reg_no = models.CharField(max_length=100)
-    disposition = models.CharField(max_length=100)
-    load_condition = models.CharField(max_length=100)
-    traffic_violation = models.CharField(max_length=100)
-    mechanical_failure = models.BooleanField()
+	uid = models.ForeignKey(AccidentIdentification, on_delete=models.CASCADE, default=0)
+	sr_no = models.IntegerField(default=0)
+	type = models.CharField(max_length=100)
+	reg_no = models.CharField(max_length=100)
+	disposition = models.CharField(max_length=100)
+	load_condition = models.CharField(max_length=100)
+	traffic_violation = models.CharField(max_length=100)
+	mechanical_failure = models.BooleanField()
 
 # DATABASE FOR TABLE E
 class VictimsInvolved(models.Model):
-    uid = models.ForeignKey(AccidentIdentification, on_delete=models.CASCADE)
+    uid = models.ForeignKey(AccidentIdentification, on_delete=models.CASCADE, default=0)
+    sr_no = models.IntegerField(default=0)
     type = models.CharField(max_length=50)
     sex = models.CharField(max_length=10)
     age = models.IntegerField()
