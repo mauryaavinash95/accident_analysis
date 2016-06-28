@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
+import datetime
 
 
 #DATABASE FOR TABLE A
@@ -10,7 +10,8 @@ class AccidentIdentification(models.Model):
     district = models.CharField(max_length=30)
     fir_no = models.CharField(max_length=30)
     police_station = models.CharField(max_length=30)
-    date_time = models.DateTimeField()               #combining time and date into single field
+    date = models.DateField(default=datetime.date.today)       
+    time = models.TimeField(default='00:00:00')
     area_type = models.CharField(max_length=30)
     accident_type = models.CharField(max_length=30)
     no_vehicles = models.IntegerField()

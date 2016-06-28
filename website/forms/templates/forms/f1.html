@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>FORM PAGE 1</title>
-   <!-- Latest compiled and minified CSS -->
-	  <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-	  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <title>ACCIDENT DATA ACQUISITION FORM</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+  <style>
+	.hint div {display:none}
+	.hint:hover div {display:block}
+	
+	body {
+    padding-bottom: 50px;
+	}
+  </style>
+  
+  
 </head>
+
 <body>
 
 <div class="container">
-	<ul class="nav nav-tabs" role="tablist">
-	  <li class="active"><a href="#form1" data-toggle="tab" role="tab">ACCIDENT IDENTIFICATION DETAILS</a></li>
-	  <li><a href="#form2" data-toggle="tab" role="tab">DETAILS OF ACCIDENT LOCATION</a></li>
-	  <li><a href="#form3" data-toggle="tab" role="tab">DETAILS OF VEHICLES INVOLVED</a></li>
-	  <li><a href="#form4" data-toggle="tab" role="tab">DETAILS OF VICTIMS INVOLVED IN ACCIDENT</a></li>
-	</ul>
+  <center><h2>ACCIDENT DATA ACQUISITION FORM</h2></center>
+  <ul class="nav nav-tabs" id="formtabs">
+    <li class="active"><a data-toggle="tab" href="#form1">FORM-1</a></li>
+    <li><a data-toggle="tab" href="#form2">FORM-2</a></li>
+    <li><a data-toggle="tab" href="#form3">FORM-3</a></li>
+    <li><a data-toggle="tab" href="#form4">FORM-4</a></li>
+  </ul>
 
-<div id="tab-content" class="tab-content">
-<form name="AccidentIdenificationForm" method="post" action="{% url 'forms:submit1' %}">
-    {% csrf_token %}
-
-	
-	<div class="tab-pane fade in active" id="form1">
-		<div class="table-responsive">
-			<table class="table table-striped">
-				
-				<tr>
+<form name="AccidentIdenificationForm" method="post" action="{% url 'forms:submit_f1' %}">
+{% csrf_token %}
+  <div class="tab-content">
+  
+    <div id="form1" class="tab-pane fade in active">      
+	  <table class="table table-striped">
+				<tr>					
 					<h3>ACCIDENT IDENTIFICATION DETAILS</h3>
 				</tr>
 				
@@ -91,18 +100,23 @@
 					<td><input type="text" name="police_station"/> </td>
 				</tr>
 
-				 <tr>
-					<td>Date & Time</td>
-					<td><input type="datetime-local" name="date_time"/> </td>
+				<tr>
+					<td>Date</td>
+					<td><input type="date" name="date"/> </td>
+				</tr>
+				
+				<tr>
+					<td>Time</td>
+					<td><input type="time" name="time"/> </td>
 				</tr>
 
 				 <tr>
 					<td>Area Type</td>
 					<td>
 						<select name="area_type">
-							<option value="Urban"> URBAN </option>
-							<option value="Rural"> RURAL </option>
-							<option value="Other"> OTHER </option>
+							<option value="Urban"> Urban </option>
+							<option value="Rural"> Rural </option>
+							<option value="Other"> Other </option>
 						</select>
 
 					</td>
@@ -194,13 +208,12 @@
 				</tr>
 
 			</table>
-		</div> <!--DIV ID TABLE RESPONSIVE-->
-	</div> <!--DIV ID FORM 1-->
+		<div style="float:right"><a data-toggle="tab" href="#form2"><input type="button" class="btn btn-success" id="btnNext" value="NEXT"/></a></div>
+		
+    </div>	
 	
-
-	<div class="tab-pane fade" id="form2">
-		<!--<div class="table-responsive">-->
-			<table class="table table-striped">
+    <div id="form2" class="tab-pane fade">
+      <table class="table table-striped">
 				<tr>
 					<h3>DETAILS OF ACCIDENT LOCATION</h3>
 				</tr>
@@ -250,7 +263,10 @@
 
 				<tr>
 					<td>Physical Divider</td>
-					<td><input type="checkbox" name="physical_divider"/> </td>
+					<td><select name="physical_divider">
+							<option value="TRUE">Yes</option>
+							<option value="FALSE">No</option>
+						</select> </td>
 				</tr>
 
 				<tr>
@@ -301,14 +317,16 @@
 					</td>
 				</tr>
 				
-		<!--</div>DIV ID TABLE RESPONSIVE-->
 			</table>
-	</div><!--DIV ID FORM 2-->
-
 	
-	<div class="tab-pane fade" id="form3">
-		<div class="table-responsive">
-			<table class="table table-striped">
+	<div style="float:left"><a data-toggle="tab" href="#form1"><input type="button" class="btn btn-danger" id="btnPrev" value="PREVIOUS"/></a></div>
+	<div style="float:right"><a data-toggle="tab" href="#form3"><input type="button" class="btn btn-success" id="btnNext" value="NEXT"/></a></div>
+	
+	</div>
+	
+	
+    <div id="form3" class="tab-pane fade">
+      <table class="table table-striped">
 				<tr>
 					<h3>DETAILS OF VEHICLES INVOLVED</h3>
 				</tr>
@@ -400,13 +418,13 @@
 				
 				
 			</table>
-		</div><!--DIV ID TABLE RESPONSIVE-->
-	</div><!--DIV ID FORM 3-->
+    <div style="float:left"><a data-toggle="tab" href="#form2"><input type="button" class="btn btn-danger" id="btnPrev" value="PREVIOUS"/></a></div>
+	<div style="float:right"><a data-toggle="tab" href="#form4"><input type="button" class="btn btn-success" id="btnNext" value="NEXT"/></a></div>
+	</div>
 	
 	
-	<div class="tab-pane fade" id="form4">
-		<div class="table-responsive">
-			<table class="table table-striped">
+    <div id="form4" class="tab-pane fade">
+      <table class="table table-striped">
 				<tr>
 					<h3>DETAILS OF VICTIMS INVOLVED IN ACCIDENT</h3>
 				</tr>
@@ -514,21 +532,30 @@
 				
 				
 			</table>
-		</div><!--DIV ID TABLE RESPONSIVE-->
-	</div><!--DIV ID FORM 4-->
-	
-	
-	<input type="submit" name="submit_button1">
+			
+	<center>  <input type="submit" name='submit' class='btn btn-lg btn-primary' value="SUBMIT"/> </center>	
+    <div style="float:left"><a data-toggle="tab" href="#form3"><input type="button" class="btn btn-danger" id="btnPrev" value="PREVIOUS"/></a></div>
+	</div>
+  
+  </div><!--TAB CONTENT-->
 
 </form>
+</div><!--CONTAINER-->
 
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 </body>
 
 
-</div><!--TAB CONTENT -->
+<script>
+$('#btnNext').click(function(){
+  $('.nav > .active').next('li').find('a').trigger('click');
+});
 
-
-</div><!--CONTAINER-->
-
+$('#btnPrev').click(function(){
+  $('.nav > .active').prev('li').find('a').trigger('click');
+});
+</script>
 </html>
+
+
 
