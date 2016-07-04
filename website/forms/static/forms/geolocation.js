@@ -11,13 +11,30 @@
       	// call the api to get the array of all the alt lng with the road id.
       	// var array = [{lat:1231,lng:13213},{lat:123123,lng:123123}];
       	var dist=[];
-      	for(var i=0;i<array.length;i++){
+      	for(var i=0;i<array.length;i++)
+      	{
   			var x = Deg2Rad(lat)-Deg2Rad(array[i].lat);
       		var y = Deg2Rad(lng)-Deg2Rad(array[i].lng);
       		var d = x*x + y*y;
       		dist.push({"dist":d,"id":array[i].id});
       	}
-
+      	dist.sort(function(a,b){
+      		return a.dist-b.dist;
+      	});
+      	var top20 = dist.slice(0,20);
+      	var unique = [];
+      	unique.push({"id":top20[0].id,"cnt":1});
+      	for(var j=1;j<top20.length;j++){
+      		var chk = unique.indexOf(top20[i]);
+      		if (chk == -1) 
+      		{
+      			unique.push({"id":top20[i].id,"cnt":1})
+      		}
+      		else
+      		{
+      			unique[chk].cnt++;
+      		}
+      	}
       }
 
       function initMap() {
