@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FORM PAGE 2</title>
+     <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+</head>
+<body>
+<h3>ACCIDENT DETAILS</h3>
+    <form name="AccidentDetailForm" method="post" action="{% url forms:submit2 %}">
+        <table class="table table-striped">
+            <tr>
+                <td>Town/Village/City</td>
+                <td><input type="text" name="town"/></td>
+            </tr>
+
+            <tr>
+                <td>Road Name</td>
+                <td><input type="text" name="road_name" /></td>
+            </tr>
+
+             <tr>
+                <td>Road Type</td>
+                <td>
+                    <select name="road_type">
+                        <option value="Expressway">Expressway</option>
+                        <option value="National Highway">National Highway</option>
+                        <option value="State Highway">State Highway</option>
+                        <option value="Other Rural Highway">Other Rural Highway</option>
+                        <option value="Urban Arterial">Urban Arterial</option>
+                        <option value="Other Urban Roads">Other Urban Roads</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </td>
+            </tr>
+
+             <tr>
+                <td>Road Name</td>
+                <td><input type="text" name="road_number" /></td>
+            </tr>
+
+            <tr>
+                <td>No. of Lanes</td>
+                <td><input type="number" name="no_lanes"/></td>
+            </tr>
+
+            <tr>
+                <td>Physical Divider</td>
+                <td><input type="checkbox" name="physical_divider"/> </td>
+            </tr>
+
+            <tr>
+                <td>Type of Road Surface</td>
+                <td>
+                    <select name="road_surface">
+                        <option value="Unpaved">Unpaved</option>
+                        <option value="Paved">Paved</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Accident</td>
+                <td>
+                    <select name="accident_spot">
+                        <option value="Road Section">Road Section</option>
+                        <option value="Near/At Junction">Near/At Junction</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Road Chainage</td>
+                <td><input type="text" name="road_chainage"/> </td>
+            </tr>
+
+            <tr>
+                <td>Longitude</td>
+                <td><input type="text" name="longitude"></td>
+            </tr>
+
+            <tr>
+                <td>Lattitude</td>
+                <td><input type="text" name="lattitude"></td>
+            </tr>
+
+            <tr>
+                <td>Type of Property Damage</td>
+                <td>
+                    <select name="property_damage">
+                        <option value="Public">Public</option>
+                        <option value="Private">Private</option>
+                        <option value="Damage to vehicle">Damage to vehicle</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td><input type="submit" name="submit_button2"/></td>
+            </tr>
+
+
+        </table>
+    </form>
+
+</body>
+</html>
