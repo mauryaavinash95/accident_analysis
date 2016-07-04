@@ -24,7 +24,8 @@ class AccidentIdentification(models.Model):
     collision_type = models.CharField(max_length=50)
 
     def __str__(self):
-        return str(str(self.pk) + '-' +self.state + '-' + self.district + '-' + self.fir_no)
+        #for i in range(0, )
+        return str(str(self.pk) + '-' +self.state + '-' + self.district + '-' + self.fir_no + '-' + str(self.date) + '-' + str(self.time))
 
 
 #DATABASE FOR TABLE B
@@ -44,20 +45,27 @@ class AccidentDetail(models.Model):
     #COMBINING THE FIELD OF TABLE C - Has a single attribute
     property_damage = models.CharField(max_length=100)
 
+    def __str__(self):
+        return str(self.town+ '-' + self.road_name+ '-' + str(self.lattitude)+ '-' +str(self.longitude))
+
 
 
 #DATABASE FOR TABLE D
 class VehiclesInvolved(models.Model):
-	uid = models.ForeignKey(AccidentIdentification, on_delete=models.CASCADE, default=0)
-	sr_no = models.IntegerField(default=0)
-	type = models.CharField(max_length=100)
-	reg_no = models.CharField(max_length=100)
-	disposition = models.CharField(max_length=100)
-	load_condition = models.CharField(max_length=100)
-	traffic_violation = models.CharField(max_length=100)
-	mechanical_failure = models.BooleanField()
+    uid = models.ForeignKey(AccidentIdentification, on_delete=models.CASCADE, default=0)
+    sr_no = models.IntegerField(default=0)
+    type = models.CharField(max_length=100)
+    reg_no = models.CharField(max_length=100)
+    disposition = models.CharField(max_length=100)
+    load_condition = models.CharField(max_length=100)
+    traffic_violation = models.CharField(max_length=100)
+    mechanical_failure = models.BooleanField()
 
-# DATABASE FOR TABLE E
+    def __str__(self):
+        return str(str(self.sr_no) + '-' + self.type+ '-' + self.reg_no)
+
+
+#DATABASE FOR TABLE E
 class VictimsInvolved(models.Model):
     uid = models.ForeignKey(AccidentIdentification, on_delete=models.CASCADE, default=0)
     sr_no = models.IntegerField(default=0)
@@ -70,3 +78,6 @@ class VictimsInvolved(models.Model):
     injury_type = models.CharField(max_length=100)
     using_safety_device = models.BooleanField()
     alcohol_drug = models.BooleanField()
+
+    def __str__(self):
+        return str(str(self.sr_no) + '-' + self.type+ '-' + self.license_no)

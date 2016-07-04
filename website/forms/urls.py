@@ -8,5 +8,4 @@ urlpatterns = [
     url(r'^$', views.index, name="index"),
 	# CALLING FUNCTION TO INSERT VALUES INTO DATABASE
     url(r'^submit_f1', views.submit_f1, name="submit_f1"),
-
 ]
