@@ -81,3 +81,9 @@ class VictimsInvolved(models.Model):
 
     def __str__(self):
         return str(str(self.sr_no) + '-' + self.type+ '-' + self.license_no)
+
+# DATABASE FOR ROAD LAT/LNG
+class RoadLocation(models.Model):
+    road_id = models.IntegerField()
+    rlongitude =models.FloatField()
+    rlatitude =models.FloatField()
