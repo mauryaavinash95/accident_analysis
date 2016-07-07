@@ -6,5 +6,6 @@ app_name = 'forms'
 urlpatterns = [
     # URL FOR INDEX PAGE OF THE FORM
     url(r'^$', views.index, name="index"),
-    url(r'^submit_form', views.submit, name="insert")
+	# CALLING FUNCTION TO INSERT VALUES INTO DATABASE
+    url(r'^submit_f1', views.submit_f1, name="submit_f1"),
 ]

@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ACCIDENT DATA ACQUISITION FORM</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <style>
+        .hint div {
+            display: none
+        }
+
+        .hint:hover div {
+            display: block
+        }
+
+        body {
+            padding-bottom: 50px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+<div class="container">
+    <center><h2>ACCIDENT DATA ACQUISITION FORM</h2></center>
+    <ul class="nav nav-tabs" id="formtabs">
+        <li class="active"><a data-toggle="tab" href="#form1">FORM-1</a></li>
+        <li><a data-toggle="tab" href="#form2">FORM-2</a></li>
+        <li><a data-toggle="tab" href="#form3">FORM-3</a></li>
+        <li><a data-toggle="tab" href="#form4">FORM-4</a></li>
+    </ul>
+
+    <form name="AccidentForm" method="post" action="{% url 'forms:submit_f1' %}" onsubmit="return val();" novalidate>
+        {% csrf_token %}
+        <div class="tab-content">
+
+            <div id="form1" class="tab-pane fade in active table-responsive">
+                <table class="table table-striped">
+                    <tr>
+                        <h3>ACCIDENT IDENTIFICATION DETAILS</h3>
+                    </tr>
+
+                    <tr>
+                        <td width="50%">State</td>
+                        <td>
+                            <select name="state" id="state" required>
+                                <option value="">------------Select State------------</option>
+                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+                                <option value="Daman and Diu">Daman and Diu</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Lakshadweep">Lakshadweep</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Orissa">Orissa</option>
+                                <option value="Pondicherry">Pondicherry</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttaranchal">Uttaranchal</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="West Bengal">West Bengal</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>District</td>
+                        <td><input type="text" name="district" id="district"/></td>
+                    </tr>
+
+                    <tr>
+                        <td>FIR No.</td>
+                        <td><input type="text" name="fir_no"/></td>
+                    </tr>
+
+                    <tr>
+                        <td>Police Station</td>
+                        <td>
+                            <select name="police_station" id="police_station" style="width:80%">
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Date</td>
+                        <td><input type="date" name="date" id="date"/></td>
+                    </tr>
+
+                    <tr>
+                        <td>Time</td>
+                        <td><input type="time" name="time" id="time"/></td>
+                    </tr>
+
+                    <tr>
+                        <td>Area Type</td>
+                        <td>
+                            <select name="area_type">
+                                <option value="">------------Select Area Type------------</option>
+                                <option value="Urban"> Urban</option>
+                                <option value="Rural"> Rural</option>
+                                <option value="Other"> Other</option>
+                            </select>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Accident Type</td>
+                        <td>
+                            <select name="accident_type">
+                                <option value="">------------Select Accident Type------------</option>
+                                <option value="Fatal"> Fatal</option>
+                                <option value="Injury Needing Hospitalisation">Injury Needing Hospitalisation</option>
+                                <option value="Injury Not Needing Hospitalisation">Injury Not Needing Hospitalisation
+                                </option>
+                                <option value="Damage to Property">Damage to Property</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>No. of Vehicles</td>
+                        <td><input type="number" style="width:50% float:left" name="no_vehicles" id="no_vehicles"
+                                   min="0" value='0' onchange="vehicle_table_populate()"/>
+                            <div id="direct_vehicle_div"></div>
+                        </td>
+                    </tr>
+
+                    <input type='hidden' name="no_victims_involved" id="no_victims_involved" value="0"/>
+
+                    <!-- CAN BE TAKEN FROM FORM 4
+
+                     <tr>
+                        <td>No. of Fatalities</td>
+                        <td><input type="number" name="no_fatalities" min="0"/> </td>
+                    </tr>
+
+                    <tr>
+                        <td>No. of Injured Needing Hospitalisation</td>
+                        <td><input type="number" name="no_injured_hospitalisation" min="0"/> </td>
+                    </tr>
+
+                    <tr>
+                        <td>No. of Injured Not Needing Hospitalisation</td>
+                        <td><input type="number" name="no_injured_not_hospitalisation" min="0"/> </td>
+                    </tr>
+
+                    -->
+
+                    <tr>
+                        <td>Hit And Run</td>
+                        <td>
+                            <select name="hit_run">
+                                <option value="TRUE"> YES</option>
+                                <option value="FALSE"> NO</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Ongoing Road Work</td>
+                        <td>
+                            <select name="ongoing_road_work">
+                                <option value="TRUE"> YES</option>
+                                <option value="FALSE"> NO</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Weather Type
+                        </td>
+                        <td>
+                            <select name="weather_type">
+                                <option value="Fine/Clear">Fine / Clear</option>
+                                <option value="Rainy">Rainy</option>
+                                <option value="Foggy">Foggy</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Collision Type
+                        </td>
+                        <td>
+                            <select name="collision_type">
+                                <option value="Hit Pedestrain">Hit Pedestrain</option>
+                                <option value="Head On Collision">Head On Collision</option>
+                                <option value="Hit from Back">Hit from Back</option>
+                                <option value="Hit from Side">Hit from Side</option>
+                                <option value="Hit Fix/Stationary Object">Hit Fix/Stationary Object</option>
+                                <option value="Overturn">Overturn</option>
+                                <option value="Run Off the Road">Run Off the Road</option>
+                                <option value="Other">Other</option>
+                            </select>
+
+                        </td>
+                    </tr>
+
+                </table>
+                <div style="float:right"><a data-toggle="tab" href="#form2"><input type="button" class="btn btn-success"
+                                                                                   onclick="nextTab()"
+                                                                                   value="NEXT"/></a></div>
+
+            </div>
+
+            <div id="form2" class="tab-pane fade">
+                <table class="table table-striped">
+                    <tr>
+                        <h3>DETAILS OF ACCIDENT LOCATION</h3>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            City/Town
+                        </td>
+                        <td>
+                            <input type="text" name="town" id="town"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Road Name
+                        </td>
+                        <td>
+                            <input type="text" name="road_name"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Road Type</td>
+                        <td>
+                            <select name="road_type">
+                                <option value="Expressway">Expressway</option>
+                                <option value="National Highway">National Highway</option>
+                                <option value="State Highway">State Highway</option>
+                                <option value="Other Rural Highway">Other Rural Highway</option>
+                                <option value="Urban Arterial">Urban Arterial</option>
+                                <option value="Other Urban Roads">Other Urban Roads</option>
+                                <option value="Unknown">Unknown</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Road Number</td>
+                        <td><input type="text" name="road_number"/></td>
+                    </tr>
+
+                    <tr>
+                        <td>No. of Lanes</td>
+                        <td><input type="number" name="no_lanes"/></td>
+                    </tr>
+
+                    <tr>
+                        <td>Physical Divider</td>
+                        <td><select name="physical_divider">
+                            <option value="TRUE">Yes</option>
+                            <option value="FALSE">No</option>
+                        </select></td>
+                    </tr>
+
+                    <tr>
+                        <td>Type of Road Surface</td>
+                        <td>
+                            <select name="road_surface">
+                                <option value="Unpaved">Unpaved</option>
+                                <option value="Paved">Paved</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Accident</td>
+                        <td>
+                            <select name="accident_spot">
+                                <option value="Road Section">Road Section</option>
+                                <option value="Near/At Junction">Near/At Junction</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Road Chainage</td>
+                        <td><input type="text" name="road_chainage"/></td>
+                    </tr>
+
+                    <tr>
+                        <td>Longitude</td>
+                        <td><input type="text" name="longitude" id="longitude"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Lattitude</td>
+                        <td><input type="text" name="lattitude" id="lattitude"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Type of Property Damage</td>
+                        <td>
+                            <select name="property_damage">
+                                <option value="Public">Public</option>
+                                <option value="Private">Private</option>
+                                <option value="Damage to vehicle">Damage to vehicle</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                </table>
+
+                <div style="display:none" id="map"></div>
+
+                <div style="float:left"><a data-toggle="tab" href="#form1"><input type="button" class="btn btn-danger"
+                                                                                  onclick="prevTab()" value="PREVIOUS"/></a>
+                </div>
+                <div style="float:right"><a data-toggle="tab" href="#form3"><input type="button" class="btn btn-success"
+                                                                                   onclick="nextTab()"
+                                                                                   value="NEXT"/></a></div>
+
+            </div>
+
+            <div id="form3" class="tab-pane fade">
+
+                <div id="vehicle_table_div" class="table-responsive"><br><br>
+                    <center><a data-toggle='tab' href='#form1' onclick='prevPrevTab();prevTab();'>You have entered 0
+                        Vehicles Involved in FORM-1</a></center>
+                    <br><br></div>
+
+
+                <div style="float:left"><a data-toggle="tab" href="#form2"><input type="button" class="btn btn-danger"
+                                                                                  onclick="prevTab()" value="PREVIOUS"/></a>
+                </div>
+                <div style="float:right"><a data-toggle="tab" href="#form4"><input type="button" class="btn btn-success"
+                                                                                   onclick="nextTab()"
+                                                                                   value="NEXT"/></a></div>
+            </div>
+
+            <div id="form4" class="tab-pane fade">
+
+                <div id='victim_table_div' class='table-responsive'>
+                    <table class="table table-striped" id="victim_table">
+
+                        <h3>DETAILS OF VICTIMS INVOLVED IN ACCIDENT</h3>
+                        <thead>
+                        <th width="5%">Sr. No.
+                        </th>
+
+                        <th width="10%">Type
+                        </th>
+
+
+                        <th>Sex
+                        </th>
+
+                        <th>Age
+                        </th>
+
+                        <th>Occupant/Driver of which vehicle
+                        </th>
+
+                        <th>Driving License No.
+                        </th>
+
+                        <th>Impacted by which vehicle
+                        </th>
+
+                        <th>Type of Injury
+                        </th>
+
+                        <th>Using Requisite Safety Device
+                        </th>
+
+                        <th>Presence of Alcohol/Drug
+                        </th>
+                        </thead>
+
+                        <tbody>
+                        </tbody>
+
+
+                    </table>
+                </div>
+                <center><input type='button' onclick='insert_new_victim()' class='btn btn-warning' style='width: 100%;'
+                               value='ADD NEW VICTIM'/></center>
+                <br><br>
+                <center><input type='button' onclick='delete_all_victims()' class='btn btn-primary'
+                               style='width:30%; float:right;' value='DELETE ALL VICTIM(S)'/></center>
+                <br><br>
+
+                <div style="float:left"><a data-toggle="tab" href="#form3"><input type="button" class="btn btn-danger"
+                                                                                  onclick="prevTab()" value="PREVIOUS"/></a>
+                </div>
+                <center><br><br> <input type="submit" name="submit" class="btn btn-lg btn-primary" value="SUBMIT"/>
+                </center>
+
+            </div>
+
+        </div><!--TAB CONTENT-->
+
+
+    </form>
+</div><!--CONTAINER-->
+
+</body>
+
+
+<!--
+4 FUNCTION IN THE BELOW SCRIPT (TO SELECT TO RELEVANT TAB ON BUTTON CLICK)
+nextTab() -> checks the currently active tab/nav-tab from the list and clicks the next tab on button click -.
+           -> Called on click of next button (FORM-1,2,3)
+
+prevTab() -> checks the currently active tab and clicks the previous tab on button click
+            -> Called on click of back button (FORM-2,3,4)
+
+nextNextTab() -> checks the currently active tab and iterates to next to next tab and clicks it on button click
+                ->
+
+prevPrevTab() -> checks the currently active tab and iterates to prev to prev tab and clicks it on button click
+                ->
+-->
+<script>
+    //TO TOGGLE TAB ON HREF CLICK
+    function nextTab() {
+
+        $(' li.active').find('a[data-toggle="tab"]').unbind('click');
+
+        $(' li.active').next()
+                .find('a[data-toggle="tab"]')
+                .click();
+    }
+
+    function prevTab() {
+        $(' li.active')
+                .prev()
+                .find('a[data-toggle="tab"]')
+                .click();
+    }
+
+    function nextNextTab() {
+        $('li.active').next().next().find('a[data-toggle="tab"]').click();
+    }
+
+    function prevPrevTab() {
+        $('li.active').prev().prev().find('a[data-toggle="tab"]').click();
+    }
+</script>
+
+<!--
+FUNCTION TO POPULATE THE VECHICLES INVOLVED TABLE
+Triggers with onchange event of no_vehicle field of FORM-1
+Creates N number of rows in the table
+-->
+<script>
+    //FUNCTION TO POPULATE VEHICLES TABLE
+    function vehicle_table_populate() {
+        var vehicle_table = document.getElementById("vehicle_table_div");
+        var no_vehicles = document.getElementById("no_vehicles").value;
+
+
+        //alert("VEHICLES -> "+no_vehicles);
+        var str = '<table class="table table-striped">';
+
+        if (no_vehicles > 0) {
+            str += '	<tr> \
+					<h3>DETAILS OF VEHICLES INVOLVED</h3> \
+				</tr> \
+				<tr> \
+					<th> \
+						Sr. No. \
+					</th> \
+					<th> \
+						Type \
+					</th> \
+					<th> \
+						Registration Plate No. \
+					</th> \
+					<th> \
+						Disposition After Accident \
+					</th> \
+					<th> \
+						Load Condition \
+					</th> \
+					<th> \
+						Traffic Violation \
+					</th> \
+					<th> \
+						Mechanical Failure \
+					</th> \
+				</tr>';
+
+
+            //TO SHOW DIALOG ON FORM 1
+            document.getElementById('direct_vehicle_div').innerHTML = "<a href='#form3' data-toggle='tab' onclick='nextNextTab();'>Fill Vehicle details on Form-3 now.</a> "
+
+            for (i = 1; i <= no_vehicles; i++) {
+                str += "<tr>";
+
+                str += "<td>" + i;
+                //str+= '<input style="width:10%" type="number" name="sr_no_'+i+'" value="'+i+'" readonly/>';
+                str += '</td>';
+
+                str += "<td>";
+                str += '<select name="type_' + i + '"> \
+					<option value="">---SELECT---</option> \
+					<option value="Motorised Two Wheeler">Motorised Two Wheeler</option>  \
+					<option value="Auto Rickshaw">Auto Rickshaw</option>  \
+					<option value="Car/Jeep/Van/Taxi">Car/Jeep/Van/Taxi</option>  \
+					<option value="Bus">Bus</option>  \
+					<option value="Light Truck">Light Truck</option>  \
+					<option value="Heavy Articulated Truck">Heavy Articulated Truck</option>  \
+					<option value="Tempo/Tractor">Tempo/Tractor</option>  \
+					<option value="Bicycle">Bicycle</option>  \
+					<option value="Cycle Rickshaw">Cycle Rickshaw</option>  \
+					<option value="Hand Drawn Cart">Hand Drawn Cart</option>  \
+					<option value="Animal Drawn Cart">Animal Drawn Cart</option> \
+					</select>';
+                str += "</td>";
+
+                str += '<td><input type="text" name="reg_no_' + i + '"/></td>';
+
+                str += '<td><select name="disposition_' + i + '"> \
+							<option value="">---SELECT---</option> \
+							<option value="Not Roadworthy">Not Roadworthy, needs to be driven away</option> \
+							<option value="Roadworthy">Roadworthy, can be driven away</option> \
+						</select></td>';
+
+                str += '<td><select name="load_condition_' + i + '">\
+							<option value="">---SELECT---</option> \
+							<option value="Normally Loaded">Normally Loaded</option>\
+							<option value="Overloaded/Hanging">Overloaded/Hanging</option>\
+							<option value="Empty">Empty</option>\
+							<option value="Unknown">Unknown</option>\
+						</select></td>';
+
+                str += '<td><select name="traffic_violation_' + i + '"> \
+							<option value="">---SELECT---</option> \
+							<option value="Over Speeding">Over Speeding</option> \
+							<option value="Jumping Red Light">Jumping Red Light</option> \
+							<option value="Driving on wrong side">Driving on wrong side</option> \
+							<option value="Unknown">Unknown</option> \
+							<option value="Not Applicable">Not Applicable</option> \
+						</select> </td>';
+
+                str += '<td><select name="mechanical_failure_' + i + '"> \
+							<option value="">---SELECT---</option> \
+							<option value="TRUE">Yes</option> \
+							<option value="FALSE">No</option> \
+						</select></td>';
+
+
+                str += '</tr>';
+            }
+            //str+= "</table>";
+
+            vehicle_table.innerHTML = str;
+        }
+        else {
+            vehicle_table.innerHTML = "<br><br><center><a data-toggle='tab' href='#form1' onclick='prevPrevTab();'>You have entered 0 Vehicles Involved in FORM-1</a></center><br><br>";
+        }
+
+    }
+
+</script>
+
+<!--
+FUNCTION TO INSERT NEW VICTIM IN FORM 4
+Triggers on click of 'ADD NEW VICTIM' button
+Appends one row to the bottom of the table
+-->
+<script>
+
+    function insert_new_victim() {
+        var table = document.getElementById('victim_table').getElementsByTagName('tbody')[0];
+        var n = table.rows.length;
+        //alert(n+1);
+        //SET NUMBER OF VICTIMS INVOLVED
+        document.getElementById("no_victims_involved").value = n + 1;
+        var row = table.insertRow(n);
+
+        var cell_victim_sr_no = row.insertCell(0);
+        cell_victim_sr_no.innerHTML = n + 1;
+
+        var cell_victim_type = row.insertCell(1);
+        //cell_victim_type.style.width = '10px';
+        cell_victim_type.innerHTML = '<select width="10%" name="victim_type_' + n + '"> \
+							<option value="Driver">Driver</option> \
+							<option value="Passenger">Passenger</option> \
+							<option value="Pedestrain">Pedestrain</option> \
+							<option value="Cyclist">Cyclist</option> \
+						</select>';
+
+
+        var cell_victim_sex = row.insertCell(2);
+        cell_victim_sex.innerHTML = '<select name="victim_sex_' + n + '"> \
+							<option value="Male">Male</option> \
+							<option value="Female">Female</option> \
+						</select>';
+
+        var cell_age = row.insertCell(3);
+        cell_age.innerHTML = '<input type="number" style="width:50px" name="victim_age_' + n + '" min=0/>';
+
+        var cell_victim_vehicle_occupant = row.insertCell(4);
+        cell_victim_vehicle_occupant.innerHTML = '<input style="width:50px" type="text" name="victim_vehicle_occupant_' + n + '"/>';
+
+        var cell_victim_license_no = row.insertCell(5);
+        cell_victim_license_no.innerHTML = '<input style="width:50px" type="text" name="victim_license_no_' + n + '"/>';
+
+        var cell_victim_impacted_by = row.insertCell(6);
+        cell_victim_impacted_by.innerHTML = '<input style="width:50px" type="text" name="victim_impacted_by_' + n + '"/>';
+
+        var cell_victim_injury_type = row.insertCell(7);
+        cell_victim_injury_type.innerHTML = '<select style="width:50px" name="victim_injury_type_' + n + '"> \
+							<option value="Fatal"> Fatal </option> \
+							<option value="Injury Needing Hospitalisation">Injury Needing Hospitalisation</option> \
+							<option value="Injury Not Needing Hospitalisation">Injury Not Needing Hospitalisation</option> \
+							<option value="No Injury">No Injury</option> \
+							<option value="Unknown">Unknown</option> \
+						</select>';
+
+        var cell_victim_using_safety_device = row.insertCell(8);
+        cell_victim_using_safety_device.innerHTML = '<select name="victim_using_safety_device_' + n + '"> \
+							<option value="TRUE">Yes</option> \
+							<option value="FALSE">No</option> \
+						</select>';
+
+        var cell_victim_impacted_by = row.insertCell(9);
+        cell_victim_impacted_by.innerHTML = '<select name="victim_alcohol_drug_' + n + '"> \
+							<option value="TRUE">Yes</option> \
+							<option value="FALSE">No</option> \
+						</select>';
+
+    }
+
+    function delete_all_victims() {
+        $("#victim_table tbody tr").remove();
+    }
+
+</script>
+
+<!--
+FUNCTION TO GET USER LOCATION
+To calculate the latitude and longitude of the device using HTML navigator.geolocation function
+Needs a secure server to run in case of Google Chrome 50+, in all other servers it yeilds results.
+-->
+<script>
+    // TO GET USER LOCATION
+    window.onload = getLocation();
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+        document.getElementById("lattitude").value = position.coords.latitude;
+        document.getElementById("longitude").value = position.coords.longitude;
+        //alert(document.getElementById("longitude").value);
+    }
+</script>
+
+
+<!--
+FUNCTION TO SET STATE, DISTRICT, TOWN AND POLICE STATION BASED ON USER LOCATION
+Uses HTML navigator.geolocation function to calculate the present latitutde and longitude
+Reverse Geocode the latitude and longitude to find the State(adminsitrative_area_level_1), District(administrative_area_level_2), Town(locality)
+Based on the current latitude and longitude of the user, Generate the dropdown for police station within 5 KM radius.
+-->
+<script>
+    // TO SET THE STATE, DISTRICT, TOWN, POLICE STATIONS IN FORM 1
+    var lat;
+    var lng;
+    var map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 8,
+            center: {lat: -33.867, lng: 151.195}
+        });
+        var geocoder = new google.maps.Geocoder;
+        var infowindow = new google.maps.InfoWindow;
+
+        geocodeLatLng(geocoder, map, infowindow);
+    }
+
+    function geocodeLatLng(geocoder, map, infowindow) {
+
+        navigator.geolocation.getCurrentPosition(function (position) {
+            lat = position.coords.latitude;
+            lng = position.coords.longitude;
+            var latlng = {lat: parseFloat(lat), lng: parseFloat(lng)};
+
+
+            //FOR SEARCHING NEARBY POLICE STATIONS
+            var service = new google.maps.places.PlacesService(map);
+            service.nearbySearch({
+                        location: latlng,
+                        radius: 5000, //5km radius
+                        //type: ['store']
+                        keyword: ['police']
+                    },
+                    function (results, status) {
+                        if (status === google.maps.places.PlacesServiceStatus.OK) {
+                            for (var i = 0; i < results.length; i++) {
+                                //createMarker(results[i]);
+                                //alert(results[i].name);
+                                var x = document.getElementById("police_station");
+                                var option = document.createElement("option");
+                                option.text = results[i].name + " - " + results[i].vicinity;
+                                option.value = results[i].name;
+                                x.add(option);
+                                //document.getElementById('info').innerHTML += results[i].name;
+
+                            }
+                        }
+                    }
+            );//END OF SERVICE.NEARBYSEARCH
+
+            //FINISHED SEARCHING NEARBY POLICE STATIONS
+
+            geocoder.geocode({'location': latlng}, function (results, status) {
+                        if (status === google.maps.GeocoderStatus.OK) {
+                            if (results[1]) {
+                                //alert (results[1].formatted_address);
+
+                                // TO SET THE STATE, DISTRICT AND TOWN IN FORM 1
+                                for (var i = 0; i < results[1].address_components.length; i++) {
+                                    for (var k = 0; k < results[1].address_components[i].types.length; k++) {
+                                        //FOR STATE
+                                        if (results[1].address_components[i].types[k] == "administrative_area_level_1")
+                                            document.getElementById('state').value = results[1].address_components[i].long_name;
+
+                                        //FOR DISTRICT
+                                        if (results[1].address_components[i].types[k] == "administrative_area_level_2")
+                                            document.getElementById('district').value = results[1].address_components[i].long_name;
+
+                                        //FOR TOWN
+                                        if (results[1].address_components[i].types[k] == "locality")
+                                            document.getElementById('town').value = results[1].address_components[i].long_name;
+
+                                        //alert(results[1].address_components[i].types[k]+"-> "+results[1].address_components[i].long_name)
+                                    }
+                                }
+                            }
+                            else {
+                                window.alert('No results found');
+                            }
+                        }
+                        else {
+                            window.alert('Geocoder failed due to: ' + status);
+                        }
+                    }
+            ); //END OF GEOCODER.GEOCODE FUNCTION
+
+
+        });// ENDING CURRENTPOSITION
+
+    }//END OF FUNCTION GEOCODELATLNG
+
+
+</script>
+
+<!--
+FUNCTION TO AUTO_DETECT SYSTEM DATE AND TIME
+-->
+<script>
+    //SCRIPT TO POPULATE DATE & TIME
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+    var today_string = yyyy + '-' + mm + '-' + dd;
+    document.getElementById('date').value = today_string;
+
+    var hours = today.getHours();
+    var minutes = today.getMinutes();
+    var seconds = today.getSeconds();
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+    var v = hours + ":" + minutes + ":" + seconds;
+
+    document.getElementById('time').value = v;
+
+
+</script>
+
+<!--
+FUNCTION TO PROVIDE INITIAL VALIDATION - INCOMPLETE
+-->
+<script>
+    function val()
+    {
+        if(document.getElementById('no_vehicles').value <= 0)
+        {
+            alert('Please fill data for atleast one vehicle');
+            return false;
+        }
+        if(document.getElementById('no_victims').value < document.getElementById('no_vehicles').value)
+        {
+            alert('Please fill data for alteast the number of vehicles involved');
+            return false;
+        }
+    }
+</script>
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOrUu1FXuJNQEpthSsCVNZ51-D8vqe9Fk&libraries=places&callback=initMap">
+//google API key =AIzaSyDOrUu1FXuJNQEpthSsCVNZ51-D8vqe9Fk
+</script>
+
+<script>
+    //TO CHECK WEATHER
+    var callbackFunction = function (data) {
+        var wind = data.query.results.channel.wind;
+        //alert(wind.chill); //chill: wind chill in degrees (integer)
+        console.log(wind.chill);
+    };
+</script>
+
+<script
+        var loc=document.getElementById('town');
+        src="https://query.yahooapis.com/v1/public/yql?q=select wind from weather.forecast where woeid in (select woeid from geo.places(1) where text='loc, il')&format=json&callback=callbackFunction">
+</script>
+</html>

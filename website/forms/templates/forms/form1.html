@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FORM PAGE 1</title>
+   <!-- Latest compiled and minified CSS -->
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+	<ul class="nav nav-tabs" role="tablist">
+	  <li class="active"><a href="#form1" data-toggle="tab" role="tab">ACCIDENT IDENTIFICATION DETAILS</a></li>
+	  <li><a href="#form2" data-toggle="tab" role="tab">DETAILS OF ACCIDENT LOCATION</a></li>
+	  <li><a href="#form3" data-toggle="tab" role="tab">DETAILS OF VEHICLES INVOLVED</a></li>
+	  <li><a href="#form4" data-toggle="tab" role="tab">DETAILS OF VICTIMS INVOLVED IN ACCIDENT</a></li>
+	</ul>
+
+<div id="tab-content" class="tab-content">
+<form name="AccidentIdenificationForm" method="post" action="{% url 'forms:submit1' %}">
+    {% csrf_token %}
+
+	
+	<div class="tab-pane fade in active" id="form1">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				
+				<tr>
+					<h3>ACCIDENT IDENTIFICATION DETAILS</h3>
+				</tr>
+				
+				<tr>
+					<td>State</td>
+					<td>
+						<select name="state" required>
+							<option value="">------------Select State------------</option>
+							<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+							<option value="Andhra Pradesh">Andhra Pradesh</option>
+							<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+							<option value="Assam">Assam</option>
+							<option value="Bihar">Bihar</option>
+							<option value="Chandigarh">Chandigarh</option>
+							<option value="Chhattisgarh">Chhattisgarh</option>
+							<option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+							<option value="Daman and Diu">Daman and Diu</option>
+							<option value="Delhi">Delhi</option>
+							<option value="Goa">Goa</option>
+							<option value="Gujarat">Gujarat</option>
+							<option value="Haryana">Haryana</option>
+							<option value="Himachal Pradesh">Himachal Pradesh</option>
+							<option value="Jammu and Kashmir">Jammu and Kashmir</option>
+							<option value="Jharkhand">Jharkhand</option>
+							<option value="Karnataka">Karnataka</option>
+							<option value="Kerala">Kerala</option>
+							<option value="Lakshadweep">Lakshadweep</option>
+							<option value="Madhya Pradesh">Madhya Pradesh</option>
+							<option value="Maharashtra">Maharashtra</option>
+							<option value="Manipur">Manipur</option>
+							<option value="Meghalaya">Meghalaya</option>
+							<option value="Mizoram">Mizoram</option>
+							<option value="Nagaland">Nagaland</option>
+							<option value="Orissa">Orissa</option>
+							<option value="Pondicherry">Pondicherry</option>
+							<option value="Punjab">Punjab</option>
+							<option value="Rajasthan">Rajasthan</option>
+							<option value="Sikkim">Sikkim</option>
+							<option value="Tamil Nadu">Tamil Nadu</option>
+							<option value="Tripura">Tripura</option>
+							<option value="Uttaranchal">Uttaranchal</option>
+							<option value="Uttar Pradesh">Uttar Pradesh</option>
+							<option value="West Bengal">West Bengal</option>
+						</select>
+					</td>
+				</tr>
+
+				<tr>
+					<td>District</td>
+					<td><input type="text" name="district"/> </td>
+				</tr>
+
+				 <tr>
+					<td>FIR No.</td>
+					<td><input type="text" name="fir_no"/> </td>
+				</tr>
+
+				 <tr>
+					<td>Police Station</td>
+					<td><input type="text" name="police_station"/> </td>
+				</tr>
+
+				 <tr>
+					<td>Date & Time</td>
+					<td><input type="datetime-local" name="date_time"/> </td>
+				</tr>
+
+				 <tr>
+					<td>Area Type</td>
+					<td>
+						<select name="area_type">
+							<option value="Urban"> URBAN </option>
+							<option value="Rural"> RURAL </option>
+							<option value="Other"> OTHER </option>
+						</select>
+
+					</td>
+				</tr>
+
+				 <tr>
+					<td>Accident Type</td>
+					<td>
+						<select name="accident_type">
+							<option value="Fatal"> Fatal </option>
+							<option value="Injury Needing Hospitalisation">Injury Needing Hospitalisation</option>
+							<option value="Injury Not Needing Hospitalisation">Injury Not Needing Hospitalisation</option>
+							<option value="Damage to Property">Damage to Property</option>
+						</select>
+					</td>
+				</tr>
+
+				 <tr>
+					<td>No. of Vehicles</td>
+					<td><input type="number" name="no_vehicles" min="0"/> </td>
+				</tr>
+
+				 <tr>
+					<td>No. of Fatalities</td>
+					<td><input type="number" name="no_fatalities" min="0"/> </td>
+				</tr>
+
+				 <tr>
+					<td>No. of Injured Needing Hospitalisation</td>
+					<td><input type="number" name="no_injured_hospitalisation" min="0"/> </td>
+				</tr>
+
+				 <tr>
+					<td>No. of Injured Not Needing Hospitalisation</td>
+					<td><input type="number" name="no_injured_not_hospitalisation" min="0"/> </td>
+				 </tr>
+
+				<tr>
+					<td>Hit And Run</td>
+					<td>
+						<select name="hit_run">
+							<option value="TRUE"> YES </option>
+							<option value="FALSE"> NO </option>
+						</select>
+					</td>
+				</tr>
+
+				<tr>
+					<td>Ongoing Road Work</td>
+					<td>
+						<select name="ongoing_road_work">
+							<option value="TRUE"> YES </option>
+							<option value="FALSE"> NO </option>
+						</select>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+					   Weather Type
+					</td>
+					<td>
+						<select name="weather_type">
+							<option value="Fine/Clear">Fine / Clear</option>
+							<option value="Rainy">Rainy</option>
+							<option value="Foggy">Foggy</option>
+							<option value="Other">Other</option>
+						</select>
+					</td>
+				</tr>
+
+				 <tr>
+					<td>
+					   Collision Type
+					</td>
+					<td>
+						<select name="collision_type">
+							<option value="Hit Pedestrain">Hit Pedestrain</option>
+							<option value="Head On Collision">Head On Collision</option>
+							<option value="Hit from Back">Hit from Back</option>
+							<option value="Hit from Side">Hit from Side</option>
+							<option value="Hit Fix/Stationary Object">Hit Fix/Stationary Object</option>
+							<option value="Overturn">Overturn</option>
+							<option value="Run Off the Road">Run Off the Road</option>
+							<option value="Other">Other</option>
+						</select>
+
+					</td>
+				</tr>
+
+			</table>
+		</div> <!--DIV ID TABLE RESPONSIVE-->
+	</div> <!--DIV ID FORM 1-->
+	
+
+	<div class="tab-pane fade" id="form2">
+		<!--<div class="table-responsive">-->
+			<table class="table table-striped">
+				<tr>
+					<h3>DETAILS OF ACCIDENT LOCATION</h3>
+				</tr>
+				
+				<tr>
+					<td>
+						City/Town
+					</td>
+					<td>
+						<input type="text" name="town"/>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						Road Name
+					</td>
+					<td>
+						<input type="text" name="road_name"/>
+					</td>
+				</tr>
+				
+				<tr>
+                <td>Road Type</td>
+                <td>
+                    <select name="road_type">
+                        <option value="Expressway">Expressway</option>
+                        <option value="National Highway">National Highway</option>
+                        <option value="State Highway">State Highway</option>
+                        <option value="Other Rural Highway">Other Rural Highway</option>
+                        <option value="Urban Arterial">Urban Arterial</option>
+                        <option value="Other Urban Roads">Other Urban Roads</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </td>
+				</tr>
+
+				 <tr>
+					<td>Road Number</td>
+					<td><input type="text" name="road_number" /></td>
+				</tr>
+
+				<tr>
+					<td>No. of Lanes</td>
+					<td><input type="number" name="no_lanes"/></td>
+				</tr>
+
+				<tr>
+					<td>Physical Divider</td>
+					<td><input type="checkbox" name="physical_divider"/> </td>
+				</tr>
+
+				<tr>
+					<td>Type of Road Surface</td>
+					<td>
+						<select name="road_surface">
+							<option value="Unpaved">Unpaved</option>
+							<option value="Paved">Paved</option>
+						</select>
+					</td>
+				</tr>
+
+				<tr>
+					<td>Accident</td>
+					<td>
+						<select name="accident_spot">
+							<option value="Road Section">Road Section</option>
+							<option value="Near/At Junction">Near/At Junction</option>
+							<option value="Other">Other</option>
+						</select>
+					</td>
+				</tr>
+
+				<tr>
+					<td>Road Chainage</td>
+					<td><input type="text" name="road_chainage"/> </td>
+				</tr>
+
+				<tr>
+					<td>Longitude</td>
+					<td><input type="text" name="longitude"></td>
+				</tr>
+
+				<tr>
+					<td>Lattitude</td>
+					<td><input type="text" name="lattitude"></td>
+				</tr>
+
+				<tr>
+					<td>Type of Property Damage</td>
+					<td>
+						<select name="property_damage">
+							<option value="Public">Public</option>
+							<option value="Private">Private</option>
+							<option value="Damage to vehicle">Damage to vehicle</option>
+							<option value="Others">Others</option>
+						</select>
+					</td>
+				</tr>
+				
+		<!--</div>DIV ID TABLE RESPONSIVE-->
+			</table>
+	</div><!--DIV ID FORM 2-->
+
+	
+	<div class="tab-pane fade" id="form3">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<tr>
+					<h3>DETAILS OF VEHICLES INVOLVED</h3>
+				</tr>
+				
+				<tr>
+					<td>Sr. No.
+					</td>
+					<td>
+						<input type="number" name="sr_no"/>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Type
+					</td>
+					<td>
+							<select name="type">
+								<option value="Motorised Two Wheeler">Motorised Two Wheeler</option> 
+								<option value="Auto Rickshaw">Auto Rickshaw</option>
+								<option value="Car/Jeep/Van/Taxi">Car/Jeep/Van/Taxi</option>
+								<option value="Bus">Bus</option>
+								<option value="Light Truck">Light Truck</option>
+								<option value="Heavy Articulated Truck">Heavy Articulated Truck</option>
+								<option value="Tempo/Tractor">Tempo/Tractor</option>
+								<option value="Bicycle">Bicycle</option>
+								<option value="Cycle Rickshaw">Cycle Rickshaw</option>
+								<option value="Hand Drawn Cart">Hand Drawn Cart</option>
+								<option value="Animal Drawn Cart">Animal Drawn Cart</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Registration Plate No.
+					</td>
+					<td>
+						<input type="text" name="reg_no"/>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Disposition After Accident
+					</td>
+					<td>
+						<select name="disposition">
+							<option value="Not Roadworthy">Not Roadworthy, needs to be driven away</option>
+							<option value="Roadworthy">Roadworthy, can be driven away</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Load Condition
+					</td>
+					<td>
+						<select name="load_condition">
+							<option value="Normally Loaded">Normally Loaded</option>
+							<option value="Overloaded/Hanging">Overloaded/Hanging</option>
+							<option value="Empty">Empty</option>
+							<option value="Unknown">Unknown</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Traffic Violation
+					</td>
+					<td>
+						<select name="traffic_violation">
+							<option value="Over Speeding">Over Speeding</option>
+							<option value="Jumping Red Light">Jumping Red Light</option>
+							<option value="Driving on wrong side">Driving on wrong side</option>
+							<option value="Unknown">Unknown</option>
+							<option value="Not Applicable">Not Applicable</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Mechanical Failure
+					</td>
+					<td>
+						<select name="mechanical_failure">
+							<option value="TRUE">Yes</option>
+							<option value="FALSE">No</option>
+						</select>
+					</td>
+				</tr>
+				
+				
+			</table>
+		</div><!--DIV ID TABLE RESPONSIVE-->
+	</div><!--DIV ID FORM 3-->
+	
+	
+	<div class="tab-pane fade" id="form4">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<tr>
+					<h3>DETAILS OF VICTIMS INVOLVED IN ACCIDENT</h3>
+				</tr>
+				
+				<tr>
+					<td>Sr. No.
+					</td>
+					<td>
+						<input type="text" name="victim_sr_no"/>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Type
+					</td>
+					<td>
+						<select name="victim_type">
+							<option value="Driver">Driver</option>
+							<option value="Passenger">Passenger</option>
+							<option value="Pedestrain">Pedestrain</option>
+							<option value="Cyclist">Cyclist</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Sex
+					</td>
+					<td>
+						<select name="victim_sex">
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Age
+					</td>
+					<td>
+						<input type="number" name="victim_age" min="0"/>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Occupant/Driver of which vehicle
+					</td>
+					<td>
+						<input type="text" name="victim_vehicle_occupant"/>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Driving License No.
+					</td>
+					<td>
+						<input type="text" name="victim_license_no"/>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Impacted by which vehicle
+					</td>
+					<td>
+						<input type="text" name="victim_impacted_by"/>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Type of Injury
+					</td>
+					<td>
+						<select name="injury_type">
+							<option value="Fatal"> Fatal </option>
+							<option value="Injury Needing Hospitalisation">Injury Needing Hospitalisation</option>
+							<option value="Injury Not Needing Hospitalisation">Injury Not Needing Hospitalisation</option>
+							<option value="No Injury">No Injury</option>
+							<option value="Unknown">Unknown</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Using Requisite Safety Device
+					</td>
+					<td>
+						<select name="victim_using_safety_device">
+							<option value="TRUE">Yes</option>
+							<option value="FALSE">No</option>
+						</select>
+					</td>
+				</tr>
+				
+				
+				<tr>
+					<td>Presence of Alcohol/Drug
+					</td>
+					<td>
+						<select name="victim_alcohol_drug">
+							<option value="TRUE">Yes</option>
+							<option value="FALSE">No</option>
+						</select>
+					</td>
+				</tr>
+				
+				
+			</table>
+		</div><!--DIV ID TABLE RESPONSIVE-->
+	</div><!--DIV ID FORM 4-->
+	
+	
+	<input type="submit" name="submit_button1">
+
+</form>
+
+</body>
+
+
+</div><!--TAB CONTENT -->
+
+
+</div><!--CONTAINER-->
+
+</html>
+
