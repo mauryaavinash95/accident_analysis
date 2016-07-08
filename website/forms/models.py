@@ -89,3 +89,9 @@ class RoadLocation(models.Model):
     rlongitude =models.FloatField()
     rlatitude =models.FloatField()
 
+class RoadNames(models.Model):
+	road_id = models.IntegerField(unique=True)
+	road_type = models.CharField(max_length=100)
+	road_name = models.CharField(max_length=200)
+	road_lanes = models.CharField(max_length=50)
+	road_oneway = models.CharField(max_length=50)

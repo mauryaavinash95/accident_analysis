@@ -100,13 +100,15 @@ import csv
 import os
 module_dir = os.path.dirname(__file__)
 def csvfile(request):
-    file_path = os.path.join(module_dir, 'test.csv')
+    file_path = os.path.join(module_dir, 'names.csv')
     file = open(file_path)
     for row in csv.reader(file):
-        r=RoadLocation()
-        r.road_id=row[0]
-        r.rlongitude=row[1]
-        r.rlatitude=row[2]
-        logger.info('saved')
+        logger.error(row)
+        r=RoadNames()
+        r.road_id = row[0] 
+        r.road_type = row[1] 
+        r.road_name = row[2] 
+        r.road_lanes = row[4]         
+        r.road_oneway = row[3] 
         r.save()
     return HttpResponse("done successfully")
