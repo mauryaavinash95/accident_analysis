@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse
 from .models import *
-
+import logging
+logger = logging.getLogger(__name__)
 # INDEX
 def index(request):
     template = loader.get_template('forms/f1.html')
     context = None
     return HttpResponse(template.render(context, request))
+
 
 def submit_f1(request):
     if request.method == 'POST':
@@ -93,3 +95,18 @@ def submit_f1(request):
 
     else:
         return HttpResponse("SOME ISSUE, PLEASE TRY AGAIN LATER")
+
+import csv
+import os
+module_dir = os.path.dirname(__file__)
+def csvfile(request):
+    file_path = os.path.join(module_dir, 'test.csv')
+    file = open(file_path)
+    for row in csv.reader(file):
+        r=RoadLocation()
+        r.road_id=row[0]
+        r.rlongitude=row[1]
+        r.rlatitude=row[2]
+        logger.info('saved')
+        r.save()
+    return HttpResponse("done successfully")

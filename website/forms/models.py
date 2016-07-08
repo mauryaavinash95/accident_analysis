@@ -83,7 +83,9 @@ class VictimsInvolved(models.Model):
         return str(str(self.sr_no) + '-' + self.type+ '-' + self.license_no)
 
 # DATABASE FOR ROAD LAT/LNG
+
 class RoadLocation(models.Model):
-    road_id = models.IntegerField()
+    road_id = models.IntegerField(unique=False)
     rlongitude =models.FloatField()
     rlatitude =models.FloatField()
+
